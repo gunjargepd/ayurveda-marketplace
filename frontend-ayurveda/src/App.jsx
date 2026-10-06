@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+ï»¿import { useState, useEffect } from 'react';
 import { api } from './services/api';
 import './App.css'
 
@@ -8,7 +8,7 @@ const SearchIcon = () => (
     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
   </svg>
 )
-
+// This is a test branch change
 const CartIcon = () => (
   <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{marginRight: '5px'}}>
     <circle cx="9" cy="21" r="1"></circle>
@@ -386,7 +386,7 @@ function App() {
                         <div className="cart-item-image">
                           <img src={item.imageUrl} alt={item.title} />
                           <div className="qty-controls">
-                            <button className="qty-btn">–</button>
+                            <button className="qty-btn">ï¿½</button>
                             <input type="text" value="1" readOnly className="qty-input" />
                             <button className="qty-btn">+</button>
                           </div>
