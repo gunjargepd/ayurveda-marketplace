@@ -1,0 +1,10 @@
+# Exclude unrelated projects
+first-ai-project/
+Daily_Work_Log/
+app_jsx.txt
+response.json
+.vscode/
+
+# Ensure backend and frontend are tracked
+!backend-ayurveda/
+!frontend-ayurveda/
