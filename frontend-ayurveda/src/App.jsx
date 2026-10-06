@@ -50,8 +50,7 @@ function App() {
   
   const [productDetails, setProductDetails] = useState(null)
   const [loadingDetails, setLoadingDetails] = useState(false)
-
-    const fetchProducts = async () => {
+  const fetchProducts = async () => {
     if (!token) {
       setLoading(false);
       return;
@@ -68,24 +67,7 @@ function App() {
       }
       setLoading(false);
     }
-  })
-      .then(res => {
-        if (!res.ok) throw new Error("Unauthorized");
-        return res.json();
-      })
-      .then(data => {
-        setProducts(data)
-        setLoading(false)
-      })
-      .catch(err => {
-        console.error("Failed to fetch products", err)
-        if (err.message === "Unauthorized") {
-          setToken(null);
-          localStorage.removeItem('jwt_token');
-        }
-        setLoading(false)
-      })
-  }
+  };
 
   useEffect(() => {
     fetchProducts();
@@ -265,7 +247,7 @@ function App() {
             <div className="results-info" style={{display: 'flex', justifyContent: 'space-between'}}>
               <span>
                 {displayedProducts.length} results for 
-                <b> {showDeals ? "Today`'s Deals" : `"${selectedCategory === 'All' ? 'Ayurvedic Products' : selectedCategory}"`}</b>
+                <b> {showDeals ? "Today`'s Deals" : `"₹{selectedCategory === 'All' ? 'Ayurvedic Products' : selectedCategory}"`}</b>
               </span>
               {showDeals && <span style={{color: '#cc0c39', fontWeight: 'bold'}}>Showing products with 20% or more discount!</span>}
             </div>
@@ -298,7 +280,7 @@ function App() {
                           </div>
                         </div>
                         <div className="original-price">
-                          Typical price: <span className="strikethrough">?{product.originalPrice.toFixed(2)}</span>
+                          Typical price: <span className="strikethrough">₹{product.originalPrice.toFixed(2)}</span>
                         </div>
                         <button className="btn-add-cart" onClick={() => handleAddToCart(product)}>
                           Add to Cart
@@ -338,7 +320,7 @@ function App() {
                         <span className="fraction">{(productDetails.discountPrice % 1).toFixed(2).substring(1)}</span>
                       </div>
                     </div>
-                    <p>Typical Price: <strong className="strikethrough">?{productDetails.originalPrice.toFixed(2)}</strong></p>
+                    <p>Typical Price: <strong className="strikethrough">₹{productDetails.originalPrice.toFixed(2)}</strong></p>
                     <p><strong>Ingredients:</strong> 100% Organic Extracts, Cold Pressed Oils.</p>
                     
                     <hr className="divider" />
@@ -350,7 +332,7 @@ function App() {
                     </ul>
                   </div>
                   <div className="details-buy-box">
-                    <h2 className="buy-box-price">?{productDetails.discountPrice?.toFixed(2)}</h2>
+                    <h2 className="buy-box-price">₹{productDetails.discountPrice?.toFixed(2)}</h2>
                     <div className="prime-badge" style={{marginBottom: '10px'}}>
                         ? <b>Prime</b> One-Day
                     </div>
@@ -386,7 +368,7 @@ function App() {
                         <div className="cart-item-image">
                           <img src={item.imageUrl} alt={item.title} />
                           <div className="qty-controls">
-                            <button className="qty-btn">�</button>
+                            <button className="qty-btn">?</button>
                             <input type="text" value="1" readOnly className="qty-input" />
                             <button className="qty-btn">+</button>
                           </div>
@@ -396,7 +378,7 @@ function App() {
                           <h4 className="cart-item-title">{item.title}</h4>
                           <div style={{color: '#007600', fontSize: '0.9rem', marginBottom: '5px'}}>In Stock</div>
                           <div className="cart-item-price-row">
-                            <span className="final">?{item.discountPrice.toFixed(2)}</span>
+                            <span className="final">₹{item.discountPrice.toFixed(2)}</span>
                           </div>
                           <div className="cart-item-actions">
                             <span onClick={() => handleRemoveFromCart(index)}>Delete</span>
@@ -418,19 +400,19 @@ function App() {
               <div className="price-header">Order Summary</div>
               <div className="price-row">
                 <span>Items ({cartItems.length}):</span>
-                <span>?{totalOriginalPrice.toFixed(2)}</span>
+                <span>₹{totalOriginalPrice.toFixed(2)}</span>
               </div>
               <div className="price-row discount-row">
                 <span>Discount:</span>
-                <span>-?{totalDiscount.toFixed(2)}</span>
+                <span>-₹{totalDiscount.toFixed(2)}</span>
               </div>
               <div className="price-total-row">
                 <span>Order Total:</span>
-                <span style={{color: '#b12704'}}>?{cartItems.length > 0 ? finalTotalAmount.toFixed(2) : '0.00'}</span>
+                <span style={{color: '#b12704'}}>₹{cartItems.length > 0 ? finalTotalAmount.toFixed(2) : '0.00'}</span>
               </div>
               {cartItems.length > 0 && (
                 <div className="savings-msg">
-                  Your total savings is ?{totalDiscount.toFixed(2)}!
+                  Your total savings is ₹{totalDiscount.toFixed(2)}!
                 </div>
               )}
             </div>
@@ -470,6 +452,8 @@ function App() {
 }
 
 export default App
+
+
 
 
 
